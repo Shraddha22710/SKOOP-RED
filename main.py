@@ -37,10 +37,11 @@ sigma_tensor = torch.tensor([noise_std], device=device)
 print("Running SKOOP-RED...")
 start = time.time()
 skoop = skoop_red_quadratic(
-    y_noisy, denoiser, lam, gamma_init, gamma_min,
-    koopman_window, koopman_every, iters, otf, otf_conj,
-    koopman_lookahead=1, beta=4, img_np=img_np
+    y_noisy, denoiser, otf, otf_conj, lam, gamma_init, gamma_min,
+    koopman_window, koopman_every, iters,
+    koopman_lookahead=1, beta=4, sigma_tensor=sigma_tensor, img_np=img_np
 )
+
 print("SKOOP-RED done in %.2fs" % (time.time() - start))
 
 print("Running Vanilla-RED...")

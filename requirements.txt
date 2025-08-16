@@ -1,0 +1,8 @@
+torch>=1.12.0
+numpy
+opencv-python
+matplotlib
+scipy
+h5py
+scikit-image
+deepinv>=0.2.1

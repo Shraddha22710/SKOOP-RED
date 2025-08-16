@@ -1,14 +1,34 @@
 import numpy as np
-import torch
 import scipy.fftpack
-from skimage.metrics import peak_signal_noise_ratio as psnr, structural_similarity as ssim
-from .utils import extract_koopman_features, koopman_dmd
+import torch
 
-@torch.no_grad()
+def extract_koopman_features(x, Dx):
+    r_np = (x - Dx)[0].detach().cpu().numpy()
+    features = []
+    patch_size = 128
+    for c in range(r_np.shape[0]):
+        for i in range(0, r_np.shape[1], patch_size):
+            for j in range(0, r_np.shape[2], patch_size):
+                patch = r_np[c, i:i+patch_size, j:j+patch_size]
+                features.append(patch.mean())
+                features.append(patch.std())
+    for c in range(r_np.shape[0]):
+        dct = scipy.fftpack.dctn(r_np[c], norm='ortho')
+        features.extend(dct[:3, :3].flatten())
+    features.append(r_np.mean())
+    features.append(r_np.std())
+    return np.array(features)
+
+def koopman_dmd(X, Y, tol=1e-6):
+    U, S, Vt = np.linalg.svd(X, full_matrices=False)
+    S_inv = np.diag([1/s if s > tol else 0 for s in S])
+    return Y @ Vt.T @ S_inv @ U.T
+
 def skoop_red_quadratic(
-    y_noisy, denoiser, blur, blurT, lam, gamma_init, gamma_min, koopman_window,
-    koopman_every, max_iters, koopman_lookahead=3, koopman_pred_threshold=1.05,
-    beta=4, img_np=None
+    y_noisy, denoiser, blur, blurT, lam, gamma_init, gamma_min,
+    koopman_window, koopman_every, max_iters,
+    koopman_lookahead=3, koopman_pred_threshold=1.05, beta=4,
+    sigma_tensor=None, img_np=None
 ):
     gamma = gamma_init
     koopman_history = []
@@ -19,10 +39,14 @@ def skoop_red_quadratic(
     best_psnr = -np.inf
     best_idx = -1
 
+    from skimage.metrics import peak_signal_noise_ratio as psnr
+    from skimage.metrics import structural_similarity as ssim
+
     for k in range(max_iters):
         Ax = blur(x)
         grad_f = blurT(Ax - y_noisy)
-        Dx = denoiser(x, sigma=torch.tensor([1/255.0], device=x.device))
+        with torch.no_grad():
+            Dx = denoiser(x, sigma=sigma_tensor)
         x_new = x - gamma * (grad_f + lam * (x - Dx))
         x_new = torch.clamp(x_new, 0, 1)
 
@@ -61,33 +85,28 @@ def skoop_red_quadratic(
 
         radius_list.append(radius)
         gamma_list.append(gamma)
-        x_np = x_new[0].permute(1, 2, 0).cpu().numpy()
-        x_prev_np = x_prev[0].permute(1, 2, 0).cpu().numpy()
-        psnr_val = psnr(img_np, x_np, data_range=1.0)
-        ssim_val = ssim(img_np, x_np, channel_axis=2, data_range=1.0)
-        psnr_list.append(psnr_val)
-        ssim_list.append(ssim_val)
+        x_np = np.clip(x_new[0].permute(1,2,0).detach().cpu().numpy(), 0, 1)
+        x_prev_np = np.clip(x_prev[0].permute(1,2,0).detach().cpu().numpy(), 0, 1)
+
+        if img_np is not None:
+            psnr_val = psnr(img_np, x_np, data_range=1.0)
+            ssim_val = ssim(img_np, x_np, channel_axis=2, data_range=1.0)
+            psnr_list.append(psnr_val)
+            ssim_list.append(ssim_val)
         norm_list.append(np.linalg.norm(x_np - x_prev_np))
 
-        if k in [9, 99, 499, max_iters - 1]:
-            snapshot_dict[k] = np.clip(x_np, 0, 1)
-        if psnr_val > best_psnr:
+        if k in [9, 99, 499, max_iters-1]:
+            snapshot_dict[k] = x_np
+        if img_np is not None and psnr_val > best_psnr:
             best_psnr = psnr_val
             best_idx = k
 
         x_prev = x.clone()
         x = x_new.clone()
 
-    if best_idx not in snapshot_dict:
-        snapshot_dict[best_idx] = np.clip(x_np, 0, 1)
-
-    return {
-        "psnr": psnr_list,
-        "ssim": ssim_list,
-        "gamma": gamma_list,
-        "radius": radius_list,
-        "norm": norm_list,
-        "snapshots": snapshot_dict,
-        "best_idx": best_idx
-    }
-
+    if img_np is not None and best_idx not in snapshot_dict:
+        snapshot_dict[best_idx] = x_np
+    return dict(
+        psnr=psnr_list, ssim=ssim_list, gamma=gamma_list, radius=radius_list,
+        norm=norm_list, snapshots=snapshot_dict, best_idx=best_idx
+    )

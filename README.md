@@ -1,8 +1,6 @@
 # Stabilizing-RED-using-the-Koopman-Operator: SKOOP-RED
 Official code for the IEEE SPL paper
 "Stabilizing RED using the Koopman Operator"
-by Shraddha Chavan and Kunal N. Chaudhury
-(Indian Institute of Science, Bengaluru)
 Submitted to IEEE Signal Processing Letters (IEEE SPL), July 2025
 
 Includes implementations, demos, and scripts to reproduce results and plots.

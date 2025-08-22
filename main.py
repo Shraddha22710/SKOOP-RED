@@ -1,6 +1,5 @@
 # File: main.py
-# Main runner script to compare SKOOP-RED, Vanilla-RED, and Equivariant-RED
-# Assumes modular structure: methods/, utils/, pretrained models installed via deepinv
+# Pretrained models installed via deepinv
 
 import torch
 import time
@@ -36,11 +35,9 @@ sigma_tensor = torch.tensor([noise_std], device=device)
 # ---------------- RUN ----------------
 print("Running SKOOP-RED...")
 start = time.time()
-skoop = skoop_red_quadratic(
+skoop = skoop_red(
     y_noisy, denoiser, otf, otf_conj, lam, gamma_init, gamma_min,
-    koopman_window, koopman_every, iters,
-    koopman_lookahead=1, beta=4, sigma_tensor=sigma_tensor, img_np=img_np
-)
+    koopman_window, koopman_every, iters, beta=4, sigma_tensor=sigma_tensor, img_np=img_np)
 
 print("SKOOP-RED done in %.2fs" % (time.time() - start))
 

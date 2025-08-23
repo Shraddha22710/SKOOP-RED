@@ -19,12 +19,13 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 iters = 2500
 lam = 0.2
-gamma_init = 2.0
+gamma_init = 2.0 
 gamma_min = 0.02
 noise_std = 1 / 255.0
 koopman_window = 50
 koopman_every = 20
-
+#gamma_fixed_vanilla = 2.0 / lam + (1.0 / (sigma ** 2)) #As per original RED paper
+ 
 # ---------------- LOAD ----------------
 x_true, y_noisy, kernel, otf, otf_conj, img_np = load_image_and_kernel(img_path, kernel_path, device, noise_std)
 

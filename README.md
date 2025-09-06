@@ -2,7 +2,8 @@
 Official code for the IEEE SPL paper
 "Stabilizing RED using the Koopman Operator"
 
-Submitted to IEEE Signal Processing Letters (IEEE SPL), July 2025
+Accepted to IEEE Signal Processing Letters (IEEE SPL), 2025
+doi: 10.1109/LSP.2025.3604690
 
 Includes implementations, demos, and scripts to reproduce results and plots.
 

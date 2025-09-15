@@ -1,6 +1,6 @@
 # SKOOP-RED
 
-![SKOOP-RED Banner](docs/images/skoop_red_banner.svg)
+![SKOOP-RED Banner](utils/1.svg)
 
 [![DOI](https://zenodo.org/badge/DOI/10.1109/LSP.2025.3604690.svg)](https://doi.org/10.1109/LSP.2025.3604690)
 [![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
@@ -8,7 +8,8 @@
 
 > **Official implementation of the paper:** **“Stabilizing RED using the Koopman Operator”**  
 > Accepted to **IEEE Signal Processing Letters (SPL),** 2025.  
-> DOI: [10.1109/LSP.2025.3604690](https://doi.org
+>[![DOI](https://zenodo.org/badge/doi/10.1109/LSP.2025.3604690.svg)](https://doi.org/10.1109/LSP.2025.3604690)
+>[![arXiv](https://img.shields.io/badge/arXiv-2501.12345-b31b1b.svg)](https://arxiv.org/abs/2509.05736)
 
 
 ## 📌 Overview

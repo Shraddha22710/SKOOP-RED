@@ -1,5 +1,3 @@
-# SKOOP-RED
-
 ![SKOOP-RED Banner](utils/1.svg)
 
 

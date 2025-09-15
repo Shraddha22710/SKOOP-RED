@@ -20,16 +20,15 @@ model-based reconstruction. Although RED gives high-fidelity reconstructions, th
 
 
 ## 🛠 Requirements
-
-torch
-numpy
-opencv-python
-matplotlib
-scikit-image
-h5py
-scipy
-deepinv (https://deepinv.github.io/deepinv/index.html)
-tqdm
+>torch
+>numpy
+>opencv-python
+>matplotlib
+>scikit-image
+>h5py
+>scipy
+>deepinv (https://deepinv.github.io/deepinv/index.html)
+>tqdm
 
 #Use `requirements.txt` to install all dependencies:
 ```python
@@ -64,7 +63,7 @@ jupyter notebook demo_SR.ipynb
 Inputs:
 
 #Update img_path in demo_SR.py or the notebook to use your own images.
-#Pretrained denoisers (DnCNN, DRUNet, etc) are automatically handled by deepinv (deepinv.github.io/deepinv/index.html).
+#Pretrained denoisers (DnCNN, DRUNet, etc) are automatically handled by deepinv.
 
 
 Outputs:
@@ -73,4 +72,4 @@ Outputs:
 📈 Results:
 Vanilla RED is often unstable (PSNR drops, residuals explode).
 SKOOP-RED provides robust stabilization, consistent improvement, and high-quality reconstructions across tasks.
-#See the paper for full quantitative and visual results.
+#See the paper for quantitative and visual results.

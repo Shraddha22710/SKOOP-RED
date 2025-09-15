@@ -35,7 +35,8 @@ model-based reconstruction. Although RED gives high-fidelity reconstructions, th
 pip install -r requirements.txt
 ```
 
-🚀 Getting Started
+---
+## 🚀 Getting Started
 
 Clone the repository and install dependencies:
 ```python
@@ -44,7 +45,9 @@ cd SKOOP-RED
 pip install -r requirements.txt
 ```
 
-📂 Directory Structure
+---
+
+## 📂 Directory Structure
 ```python
 SKOOP-RED/
 ├── demo_SR.ipynb           
@@ -60,21 +63,22 @@ SKOOP-RED/
 jupyter notebook demo_SR.ipynb
 ```
 
-Inputs:
+---
+## Inputs:
 
 #Update img_path in demo_SR.py or the notebook to use your own images.
 #Pretrained denoisers (DnCNN, DRUNet, etc) are automatically handled by deepinv.
 
 
-Outputs:
+## Outputs:
 #Reconstructed images and result plots (PSNR, residuals) are saved in the working directory.
 
-📈 Results:
+## 📈 Results:
 Vanilla RED is often unstable (PSNR drops, residuals explode).
 SKOOP-RED provides robust stabilization, consistent improvement, and high-quality reconstructions across tasks.
 #See the paper for quantitative and visual results.
 
-
+---
 ## 📚 Citation
 
 If you use this code or build upon our work, please cite:

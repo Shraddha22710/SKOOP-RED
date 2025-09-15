@@ -7,7 +7,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 > **Official implementation of the paper:** **“Stabilizing RED using the Koopman Operator”**  
-> Accepted to the **IEEE Signal Processing Letters (SPL),** 2025.  
+> Accepted to **IEEE Signal Processing Letters (SPL),** 2025.  
 > DOI: [10.1109/LSP.2025.3604690](https://doi.org
 
 

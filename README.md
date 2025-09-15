@@ -1,11 +1,16 @@
-# Stabilizing-RED-using-the-Koopman-Operator: SKOOP-RED
-Official code for the IEEE SPL paper
-"Stabilizing RED using the Koopman Operator"
+# SKOOP-RED
 
-Accepted to IEEE Signal Processing Letters (IEEE SPL), 2025
-doi: 10.1109/LSP.2025.3604690
+![SKOOP-RED Banner](docs/images/skoop_red_banner.svg)
 
-Includes implementations, demos, and scripts to reproduce results and plots.
+[![DOI](https://zenodo.org/badge/DOI/10.1109/LSP.2025.3604690.svg)](https://doi.org/10.1109/LSP.2025.3604690)
+[![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+> **Official implementation of the IEEE Signal Processing Letters (SPL) 2025 paper**  
+> **“Stabilizing RED using the Koopman Operator”**  
+> Accepted to *IEEE SPL*, 2025.  
+> DOI: [10.1109/LSP.2025.3604690](https://doi.org
+
 
 ## 📌 Overview
 

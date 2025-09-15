@@ -73,3 +73,27 @@ Outputs:
 Vanilla RED is often unstable (PSNR drops, residuals explode).
 SKOOP-RED provides robust stabilization, consistent improvement, and high-quality reconstructions across tasks.
 #See the paper for quantitative and visual results.
+
+
+## 📚 Citation
+
+If you use this code or build upon our work, please cite:
+
+**Stabilizing RED using the Koopman Operator**  
+Shraddha Chavan and Kunal N. Chaudhury  
+*IEEE Signal Processing Letters (SPL), 2025*  
+DOI: [10.1109/LSP.2025.3604690](https://doi.org/10.1109/LSP.2025.3604690)
+
+```bibtex
+@ARTICLE{11145758,
+  author={Chavan, Shraddha and Chaudhury, Kunal N.},
+  journal={IEEE Signal Processing Letters}, 
+  title={Stabilizing RED using the Koopman Operator}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-5},
+  keywords={Image reconstruction; Deblurring; Stability analysis; Superresolution; Training; Runtime; Kernel; Hilbert space; Heuristic algorithms; Data mining; image reconstruction; deep denoiser; RED; convergence; Koopman operator; stability},
+  doi={10.1109/LSP.2025.3604690}
+}
+
